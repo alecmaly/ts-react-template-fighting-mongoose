@@ -4,7 +4,17 @@
   "description": "Client and Server components",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install_client": "cd Client && npm install",
+    "build_client": "cd Client && npm run build",
+    "dockerize_client": "cd Client && npm run dockerize",
+
+    "install_server": "cd API_Server && npm install",
+    "build_server": "cd API_Server && npm run build",
+    "dockerize_server": "cd API_Server && npm run dockerize",
+
+    "install_all": "npm run install_client && npm run install_server",
+    "build_all": "npm run build_client && npm run build_server",
+    "dockerize_all": "npm run dockerize_client && npm run dockerize_server"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,8 @@
     "start": "nodemon ./src/server.js",
     "migrate_db": "knex migrate:latest",
     "up": "npm run migrate_db && node ./src/server.js",
-    "build": "tsc"
+    "build": "tsc",
+    "dockerize": "docker build --rm -f Dockerfile -t alecmaly/dockerized-api . && docker push alecmaly/dockerized-app"
   },
   "author": "",
   "license": "ISC",

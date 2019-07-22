@@ -9,7 +9,8 @@
     "type-check": "tsc",
     "test": "jest --coverage",
     "jest-clear": "jest --clearCache",
-    "lint": "eslint './src/**/*.{ts,tsx}'"
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "dockerize": "docker build --rm -f Dockerfile -t alecmaly/dockerized-app . && docker push alecmaly/dockerized-app"
   },
   "author": "Alec J Maly",
   "license": "ISC",
