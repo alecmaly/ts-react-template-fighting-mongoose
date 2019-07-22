@@ -1,0 +1,39 @@
+# build local dev environment
+# docker-machine 192.168.99.100   :5432
+version: "3"
+services:
+  api_server:
+    build: .
+    # image: dockerized-api
+    # ports:
+    #  - 3000:3000
+    expose:
+      - "3000"
+    volumes:
+      - /.env:/src/
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm run migrate_db; node ./src/server.js'
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/practicedocker
+      # - PORT=3000
+  db:
+    image: postgres
+    container_name: "dev_postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=practicedocker
+
+
+  loadbalancer:
+      build: ./load-balancer
+      depends_on:
+          - api_server
+      tty: true
+      links:
+          - api_server
+      ports:
+          - '8080:8080'

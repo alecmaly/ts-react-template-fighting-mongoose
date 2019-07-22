@@ -1,0 +1,66 @@
+{
+  "name": "react-ts-template",
+  "version": "1.0.0",
+  "description": "React TS Template.",
+  "main": "index.js",
+  "scripts": {
+    "build": "SET NODE_ENV=production && webpack --mode production",
+    "start": "set NODE_ENV=development && webpack-dev-server --mode development --config webpack.config.js",
+    "type-check": "tsc",
+    "test": "jest --coverage",
+    "jest-clear": "jest --clearCache",
+    "lint": "eslint './src/**/*.{ts,tsx}'"
+  },
+  "author": "Alec J Maly",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/enzyme": "^3.10.1",
+    "@types/jest": "^24.0.15",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint-plugin-compat": "^3.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2",
+    "react-test-renderer": "^16.8.6",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alecjmaly/react-ts-template.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "webpack",
+    "jest",
+    "enzyme",
+    "passport",
+    "oauth"
+  ],
+  "bugs": {
+    "url": "https://github.com/alecjmaly/react-ts-template/issues"
+  },
+  "homepage": "https://github.com/alecjmaly/react-ts-template#readme"
+}
