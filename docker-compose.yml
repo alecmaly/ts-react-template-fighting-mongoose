@@ -34,7 +34,8 @@ services:
       - POSTGRES_DB=practicedocker
 
   loadbalancer:
-      build: ./Load_Balancer
+      # build: ./Load_Balancer
+      image: alecmaly/loadbalancer
       depends_on:
           - api_server
       tty: true

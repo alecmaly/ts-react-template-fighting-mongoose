@@ -12,9 +12,12 @@
     "build_server": "cd API_Server && npm run build",
     "dockerize_server": "cd API_Server && npm run dockerize",
 
+    "dockerize_load_balancer": "cd Load_Balancer && docker build --rm -f Dockerfile -t alecmaly/loadbalancer && docker push alecmaly/loadbalancer",
+
+
     "install_all": "npm run install_client && npm run install_server",
     "build_all": "npm run build_client && npm run build_server",
-    "dockerize_all": "npm run dockerize_client && npm run dockerize_server"
+    "dockerize_all": "npm run dockerize_client && npm run dockerize_server && npm run dockerize_load_balancer"
   },
   "repository": {
     "type": "git",
