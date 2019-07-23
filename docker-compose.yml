@@ -2,15 +2,21 @@
 # docker-machine 192.168.99.100   :5432
 version: "3"
 services:
+  client:
+    # build: ./Client
+    image: alecmaly/dockerized-app
+    ports:
+      - "80:80"
+
   api_server:
-    build: .
-    # image: dockerized-api
+    # build: ./API_Server
+    image: alecmaly/dockerized-api
     # ports:
     #  - 3000:3000
     expose:
       - "3000"
     volumes:
-      - /.env:/src/
+      - ./API_Server/.env:/src/
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm run migrate_db; node ./src/server.js'
     depends_on:
       - db
@@ -27,9 +33,8 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=practicedocker
 
-
   loadbalancer:
-      build: ./load-balancer
+      build: ./Load_Balancer
       depends_on:
           - api_server
       tty: true
