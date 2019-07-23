@@ -6,8 +6,7 @@ API server can handle authentication with various Oauth providers.
 
 - [Node.js](https://nodejs.org/en/download/)
 - [Docker](https://docs.docker.com/)
-- [Terraform](https://www.terraform.io/downloads.html)
-  - Note: Terraform can be replaced with a Terraform docker container
+- [Terraform](https://www.terraform.io/downloads.html) OR docker-compose
 
 ## Run Instructions
 
