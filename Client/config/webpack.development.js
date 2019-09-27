@@ -3,7 +3,7 @@
         paths
       } = options;
       config.devServer = {
-        contentBase: paths.PUBLIC_DIR,
+        contentBase: paths.SRC_PATH,
         host: 'localhost',
         port: 8000,
         historyApiFallback: true,

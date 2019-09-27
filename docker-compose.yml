@@ -14,7 +14,7 @@ services:
     # ports:
     #  - 3000:3000
     expose:
-      - "3000"
+      - "3001"
     volumes:
       - ./API_Server/.env:/src/
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm run migrate_db; node ./src/server.js'
@@ -23,6 +23,25 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/practicedocker
       # - PORT=3000
+
+  api_server2:
+      # build: ./API_Server
+      image: alecmaly/dockerized-api
+      # aports:
+      #   - 3000:3000
+      expose:
+        - "3000"
+      volumes:
+        - ./API_Server/.env:/src/
+      command: bash -c 'node ./src/server.js'
+      depends_on:
+        - db
+      environment:
+        - DATABASE_URL=postgres://postgres:password@db:5432/practicedocker
+        # - PORT=3000
+
+
+
   db:
     image: postgres
     container_name: "dev_postgres"

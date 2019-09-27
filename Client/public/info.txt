@@ -1,0 +1,48 @@
+
+    
+(cmd) push app into server:
+    git push heroku master
+
+
+
+github help:
+    https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+
+    
+
+my github project:
+    https://github.com/alecjmaly/olgas-website.git
+
+
+
+website url:
+    https://olgas-website-dev.herokuapp.com/
+
+
+
+
+Heroku Info
+    olgas-website
+    https://olgas-website.herokuapp.com/ | https://git.heroku.com/olgas-website.git
+olgas-website-dev  (IN USE)
+    https://olgas-website-dev.herokuapp.com/ | https://git.heroku.com/olgas-website-dev.git
+
+
+
+
+(cmd)   heroku login
+
+save changes (to heroku):      git remote -v
+    git add . 
+    git remote add origin **remote repository URL**
+
+    git commit -m "COMMIT__COMMENTS"
+    git push heroku master
+
+
+save changes to my repository:
+    git push origin master
+
+
+Database:
+    postgresql-animate-60970 as DATABASE_URL

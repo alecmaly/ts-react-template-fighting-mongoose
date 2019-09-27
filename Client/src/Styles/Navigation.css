@@ -1,0 +1,8 @@
+.navigation-top {
+    position: fixed;
+}
+
+.navigation-left {
+    border-right: 5px solid black;
+}
+

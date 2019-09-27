@@ -21,10 +21,11 @@ module.exports = (publicKey) => {
       // validate expiration on jwt
       // fail if expired
 
-
+      console.log('is logged in');
       next();
     } else {
-      res.status(401).send('Not logged in');
+      console.log('is NOT logged is');
+      res.status(401).json({'msg': 'Not logged in'});
     }
   }
 

@@ -7,13 +7,20 @@ module.exports = (jwt, privateKey) => {
     res.cookie('jwt', token, { httpOnly: true })
 
 
-    console.log('Referrer is: ' + req.session.redirectTo)
+    console.log('Referrer is: ' + req.session.redirectTo);
     // res.send(JSON.stringify(Objecet.keys(req), null, 2))
-    res.redirect(req.session.redirectTo);
+    // res.send(JSON.stringify(Objecet.keys(req), null, 2));
+
+    // VALIDATE REDIRECT URL FOR SECURITY
+    // res.redirect(req.get('Referrer') || '/');
+    res.redirect('http://fightingmongooses.com');
+    // res.json({ jwt: token });  
   }
 
   function setRedirect (req, res, next) {
     req.session.redirectTo = req.get('Referrer')
+    //req.session.redirectTo = 'http://fightingmongooses.com/'
+
     next()
   }
 

@@ -37,7 +37,7 @@ app.use(cookieParser())
 // set headers
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', 'http://192.168.99.100'); // req.get('host'));
+  res.header('Access-Control-Allow-Origin', 'http://fightingmongooses.com'); // req.get('host')); || http://fightingmongooses.com
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   if ('OPTIONS' == req.method) {
@@ -129,8 +129,10 @@ app.get('/login', (req, res) => {
 app.get('/logout', function(req, res){
   req.logout();
   // reset cookie and redirect
-  res.cookie('jwt', '', { expires: new Date(0) })
-  res.redirect(req.get('Referrer'));
+  res.cookie('jwt', '', { httpOnly: true, expires: new Date(0) })
+  req.session.destroy(function (err) {
+    res.redirect(req.get('Referrer') || '/');
+  })
 });
 
 
@@ -140,7 +142,10 @@ app.get('/me', isLoggedIn, function(req, res, next) {
   // req.user - will exist
   // load user orders and render them
   var decoded = jwt.verify(req.cookies['jwt'], publicKey, { algorithm: 'RS256'});
-  res.send(decoded)
+
+  console.log('logged in... send decoded back');
+  console.log(decoded);
+  res.send('logged in as ' + JSON.stringify(decoded, 2, null));
 });
 
 
@@ -154,7 +159,8 @@ app.get('/me', isLoggedIn, function(req, res, next) {
 // })
 
 
-
+// import email controller
+require('./api/controllers/email')(app)
 
 
 // route homepage

@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const autoprefixer = require('autoprefixer')
 const configDevelopment = require("./config/webpack.development");
 
 const rootPath = path.resolve(__dirname);
@@ -28,18 +28,32 @@ module.exports = env => {
     // Enable sourcemaps for debugging webpack's output.
     // devtool: "source-map",
     devtool,
-    entry: path.resolve(paths.SRC_PATH, 'index.tsx'),
+    entry: [
+      require.resolve('./config/polyfills'),
+
+
+      path.resolve(paths.SRC_PATH, 'index.tsx')
+    ],
     output: {
       filename: outputFilename,
       path: paths.DIST_DIR
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", "jsx", ".json"]
+      extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
     },
 
     module: {
-      rules: [{
+      rules: [
+        {
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: 10000,
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
+        },
+        {
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
           use: [{
@@ -60,8 +74,45 @@ module.exports = env => {
             removeComments: false,
             collapseWhitespace: false
           }
-        }
-      ]
+        },
+        // "postcss" loader applies autoprefixer to our CSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "style" loader turns CSS into JS modules that inject <style> tags.
+          // In production, we use a plugin to extract that CSS to a file, but
+          // in development "style" loader enables hot editing of CSS.
+          {
+            test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+            ],
+          }
+      ],
     },
 
     plugins: [
