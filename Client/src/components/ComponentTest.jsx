@@ -39,7 +39,7 @@ class ComponentTest extends Component {
     render() {
                 return (
             <div className='componentTest'>
-                <p>I love Olga -- This is top navigation: {this.props.name}</p>
+                <p>This is a test component... {this.props.name}</p>
                 <input id='myText' type='text' onChange={this.changeStuff} value={this.state.myValue} />
                 <button type='button' className={'btn btn-danger'} onClick={this.toggle}>Click Me</button>
                 <p id='myID'>{this.state.myValue}</p>
